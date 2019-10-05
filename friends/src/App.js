@@ -4,6 +4,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import "./App.scss";
 import Login from "./components/Login";
 import FriendList from "./components/FriendList";
+import AddFriend from "./components/AddFriend";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <PrivateRoute path="/friends" component={FriendList} />
+        <PrivateRoute path="/addfriend" component={AddFriend} />
       </Switch>
     </div>
   );
