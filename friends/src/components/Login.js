@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Login = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return <Redirect to="/friends" />;
+  }
 
   const onSubmit = e => {
     e.preventDefault();
