@@ -1,0 +1,35 @@
+@mixin flex($direction, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+.App {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.nav {
+  @include flex(null, center, space-around);
+  &__link {
+    text-decoration: none;
+  }
+}
+
+.form {
+  @include flex(column, center, center);
+  margin-top: 20px;
+  &__input {
+    all: unset;
+    margin-bottom: 15px;
+    border-bottom: 1px solid black;
+  }
+  &__button {
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+  }
+}
