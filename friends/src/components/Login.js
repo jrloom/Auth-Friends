@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-const Login = () => {
+const Login = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,17 +11,39 @@ const Login = () => {
       username: username,
       password: password
     };
-    console.log(credentials);
+    axiosWithAuth()
+      .post("/login", credentials)
+      .then(res => {
+        localStorage.setItem("token", res.data.payload);
+        props.history.push("/friends");
+      })
+      .catch(err => console.log("bad things --> ", err));
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input type="text" name="name" value={username} onChange={e => setUsername(e.target.value)} autoComplete="off" />
-        <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="off" />
-        <button type="submit">submit</button>
-      </form>
-    </div>
+    <form onSubmit={onSubmit} className="form">
+      <input
+        type="text"
+        name="name"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+        placeholder="username"
+        autoComplete="off"
+        className="form__input"
+      />
+      <input
+        type="password"
+        name="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        placeholder="password"
+        autoComplete="off"
+        className="form__input"
+      />
+      <button className="form__button" type="submit">
+        send
+      </button>
+    </form>
   );
 };
 
